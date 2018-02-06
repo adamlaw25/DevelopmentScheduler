@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DevelopmentSchedulerTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DevelopmentScheduler</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">DevelopmentSchedulerTest.java</span></div><h1>DevelopmentSchedulerTest.java</h1><pre class="source lang-java linenums">import static org.junit.Assert.*;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Random;
+
+import org.junit.Before;
+import org.junit.Test;
+
+<span class="fc" id="L10">public class DevelopmentSchedulerTest {</span>
+
+	private DevelopmentScheduler testScheduler;
+	private DevelopmentScheduler.TestHook testHook;
+
+	@Before
+	public void setUp() throws Exception {
+		/* Set up the object to be tested */
+<span class="fc" id="L18">		testScheduler = new DevelopmentScheduler();</span>
+<span class="fc" id="L19">		testHook = testScheduler.new TestHook();</span>
+<span class="fc" id="L20">	}</span>
+
+	// test assignmentNodeInitializer
+	// Boundary: no assignment
+	// Compound Boundary: no assignment
+	@Test
+	public void test_assignmentNodeInitializer_none() {
+<span class="fc" id="L27">		int assignmentsList[][] = {};</span>
+<span class="fc" id="L28">		DevelopmentScheduler schedule = new DevelopmentScheduler();</span>
+<span class="fc" id="L29">		schedule.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L30">		HashMap&lt;Integer, Assignment&gt; assignmentsMap = schedule.getAssignmentsMap();</span>
+<span class="fc" id="L31">		assertTrue(assignmentsMap.isEmpty());</span>
+<span class="fc" id="L32">	}</span>
+
+	// Boundary: only 1 assignment
+	@Test
+	public void test_assignmentNodeInitializer_only_one() {
+<span class="fc" id="L37">		int assignmentsList[][] = { { 1, 3 } };</span>
+<span class="fc" id="L38">		DevelopmentScheduler schedule = new DevelopmentScheduler();</span>
+<span class="fc" id="L39">		schedule.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L40">		HashMap&lt;Integer, Assignment&gt; assignmentsMap = schedule.getAssignmentsMap();</span>
+<span class="fc" id="L41">		assertTrue(assignmentsMap.containsKey(1));</span>
+<span class="fc" id="L42">		assertEquals(assignmentsMap.get(1).getDuration(), 3);</span>
+<span class="fc" id="L43">	}</span>
+
+	// Structured basis: a case with some random assignments
+	// Good data: some expected good data
+	@Test
+	public void test_assignmentNodeInitializer_good_data() {
+<span class="fc" id="L49">		int assignmentsList[][] = { { 1, 3 }, { 2, 2 }, { 3, 4 }, { 4, 4 } };</span>
+<span class="fc" id="L50">		DevelopmentScheduler schedule = new DevelopmentScheduler();</span>
+<span class="fc" id="L51">		schedule.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L52">		HashMap&lt;Integer, Assignment&gt; assignmentsMap = schedule.getAssignmentsMap();</span>
+<span class="fc" id="L53">		assertTrue(assignmentsMap.containsKey(1));</span>
+<span class="fc" id="L54">		assertTrue(assignmentsMap.containsKey(2));</span>
+<span class="fc" id="L55">		assertTrue(assignmentsMap.containsKey(3));</span>
+<span class="fc" id="L56">		assertTrue(assignmentsMap.containsKey(4));</span>
+		// not contain
+<span class="fc" id="L58">		assertFalse(assignmentsMap.containsKey(5));</span>
+<span class="fc" id="L59">		assertEquals(assignmentsMap.get(1).getDuration(), 3);</span>
+<span class="fc" id="L60">		assertEquals(assignmentsMap.get(2).getDuration(), 2);</span>
+<span class="fc" id="L61">		assertEquals(assignmentsMap.get(3).getDuration(), 4);</span>
+<span class="fc" id="L62">		assertEquals(assignmentsMap.get(4).getDuration(), 4);</span>
+<span class="fc" id="L63">	}</span>
+
+	// Compound Boundary test: a great amount of input for the 2d array
+	// Stress test: a big load of number
+	@Test
+	public void test_assignmentNodeInitializer_stress() {
+<span class="fc" id="L69">		int assignmentsList[][] = new int[100000][2];</span>
+<span class="fc" id="L70">		int durationList[] = new int[100000];</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">		for (int i = 0; i &lt; 100000; i++) {</span>
+<span class="fc" id="L72">			Random ran = new Random();</span>
+<span class="fc" id="L73">			int k = ran.nextInt(500) + 1;</span>
+<span class="fc" id="L74">			assignmentsList[i] = new int[] { i + 1, k };</span>
+<span class="fc" id="L75">			durationList[i] = k;</span>
+		}
+<span class="fc" id="L77">		DevelopmentScheduler schedule = new DevelopmentScheduler();</span>
+<span class="fc" id="L78">		schedule.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L79">		HashMap&lt;Integer, Assignment&gt; assignmentsMap = schedule.getAssignmentsMap();</span>
+
+<span class="fc bfc" id="L81" title="All 2 branches covered.">		for (int i = 1; i &lt;= 100000; i++) {</span>
+<span class="fc" id="L82">			assertTrue(assignmentsMap.containsKey(i));</span>
+<span class="fc" id="L83">			assertEquals(assignmentsMap.get(i).getDuration(), durationList[i - 1]);</span>
+		}
+<span class="fc" id="L85">	}</span>
+
+	// test addAssignment
+	// Structured basis: id and duration are both greater than 0
+	// Boundary: id and duration are 1 more than 0
+	// Good Data: expected data
+	// Data flow for assignmentsMap
+	@Test
+	public void test_addAssignment_both_positive() {
+<span class="fc" id="L94">		assertEquals(testHook.addAssignment(new int[] { 1, 1 }), 1);</span>
+<span class="fc" id="L95">	}</span>
+
+	// Structured basis: id and duration are both less than 0
+	// Boundary: id and duration are 1 less than 0
+	// Bad data: illegal data
+	// Data-flow:
+	@Test(expected = IllegalArgumentException.class)
+	public void test_addAssignment_both_negative() {
+<span class="nc" id="L103">		testHook.addAssignment(new int[] { -1, -1 });</span>
+<span class="nc" id="L104">	}</span>
+
+	// Structured basis: id and duration are both less than 0
+	// Boundary: id and duration are 0
+	// Bad data: illegal data
+	@Test(expected = IllegalArgumentException.class)
+	public void test_addAssignment_both_zero() {
+<span class="nc" id="L111">		testHook.addAssignment(new int[] { 0, 0 });</span>
+<span class="nc" id="L112">	}</span>
+
+	// Compound Boundary: negative big numbers
+	// Bad data: illegal data
+	@Test(expected = IllegalArgumentException.class)
+	public void test_addAssignment_both_neg_big() {
+<span class="nc" id="L118">		testHook.addAssignment(new int[] { -1000000000, -1000000000 });</span>
+<span class="nc" id="L119">	}</span>
+
+	// Compound Boundary: positive big numbers
+	// Bad data: extreme data
+	// Data flow for assignmentsMap
+	@Test
+	public void test_addAssignment_both_pos_big() {
+<span class="fc" id="L126">		assertEquals(testHook.addAssignment(new int[] { 1000000000, 1000000000 }), 1000000000);</span>
+<span class="fc" id="L127">	}</span>
+
+	// Boundary: no assignment
+	// Compound Boundary: no assignment
+	@Test(expected = ArrayIndexOutOfBoundsException.class)
+	public void test_addAssignment_no_assignment() {
+<span class="nc" id="L133">		testHook.addAssignment(new int[] {});</span>
+<span class="nc" id="L134">	}</span>
+
+	// test addRelations
+	// Structured basis: a random list of input
+	// Good data
+	// Data flow for targetAssignment and sourceAssignment
+	@Test
+	public void test_addRelations_good_data() {
+<span class="fc" id="L142">		int assignmentsList[][] = { { 1, 3 }, { 2, 2 }, { 3, 4 }, { 4, 4 } };</span>
+<span class="fc" id="L143">		int relationsList[][] = { { 2, 1, 2 }, { 2, 4, 1 }, { 3, 2, 4 }, { 3, 1, 1 }, { 4, 1, 3 } };</span>
+<span class="fc" id="L144">		DevelopmentScheduler schedule = new DevelopmentScheduler();</span>
+<span class="fc" id="L145">		schedule.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L146">		schedule.addRelations(relationsList);</span>
+<span class="fc" id="L147">		HashMap&lt;Integer, Assignment&gt; assignmentsMap = schedule.getAssignmentsMap();</span>
+		// check if map is empty
+<span class="fc" id="L149">		assertFalse(assignmentsMap.isEmpty());</span>
+		// check the duration of the in edge of end node #1
+<span class="fc" id="L151">		assertEquals(assignmentsMap.get(1).getEndNode().getInEdges().get(0).getDuration(), 3);</span>
+		// check the connected node id of the end node #2
+<span class="fc" id="L153">		assertEquals(assignmentsMap.get(2).getEndNode().getOutEdges().get(0).getConnectedNode().getId(), 3);</span>
+		// check the duration of the out edge of end node #4
+<span class="fc" id="L155">		assertEquals(assignmentsMap.get(4).getEndNode().getOutEdges().get(0).getDuration(), 0);</span>
+		// check if the in edge list is empty for start node #4
+<span class="fc" id="L157">		assertTrue(assignmentsMap.get(4).getStartNode().getInEdges().isEmpty());</span>
+<span class="fc" id="L158">	}</span>
+
+	// Bad data: no data
+	// Boundary: no data
+	// Compound boundary
+	@Test
+	public void test_addRelations_no_assignment_relation() {
+<span class="fc" id="L165">		int assignmentsList[][] = {};</span>
+<span class="fc" id="L166">		int relationsList[][] = {};</span>
+<span class="fc" id="L167">		DevelopmentScheduler schedule = new DevelopmentScheduler();</span>
+<span class="fc" id="L168">		schedule.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L169">		schedule.addRelations(relationsList);</span>
+<span class="fc" id="L170">		HashMap&lt;Integer, Assignment&gt; assignmentsMap = schedule.getAssignmentsMap();</span>
+		// check if map is empty
+<span class="fc" id="L172">		assertTrue(assignmentsMap.isEmpty());</span>
+<span class="fc" id="L173">	}</span>
+
+	// Boundary: 1 relation
+	// Compound boundary: 1 relation
+	// Data flow for targetAssignment and sourceAssignment
+	@Test
+	public void test_addRelations_one_relation() {
+<span class="fc" id="L180">		int assignmentsList[][] = { { 1, 3 }, { 2, 2 } };</span>
+<span class="fc" id="L181">		int relationsList[][] = { { 2, 1, 2 } };</span>
+<span class="fc" id="L182">		DevelopmentScheduler schedule = new DevelopmentScheduler();</span>
+<span class="fc" id="L183">		schedule.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L184">		schedule.addRelations(relationsList);</span>
+<span class="fc" id="L185">		HashMap&lt;Integer, Assignment&gt; assignmentsMap = schedule.getAssignmentsMap();</span>
+		// check if map is empty
+<span class="fc" id="L187">		assertFalse(assignmentsMap.isEmpty());</span>
+		// check the connected node id of the start node #2
+<span class="fc" id="L189">		assertEquals(assignmentsMap.get(2).getStartNode().getInEdges().get(0).getConnectedNode().getId(), 1);</span>
+<span class="fc" id="L190">	}</span>
+
+	// test edgeCreator
+	// Structured basis
+	// Good data: expected data
+	// Data flow for targetNode and SourceNode
+	@Test
+	public void test_edgeCreator() {
+
+<span class="fc" id="L199">		int assignmentsList[][] = { { 1, 3 }, { 2, 2 } };</span>
+<span class="fc" id="L200">		testScheduler.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L201">		Assignment targetAssignment = testScheduler.getAssignmentsMap().get(2);</span>
+<span class="fc" id="L202">		Assignment sourceAssignment = testScheduler.getAssignmentsMap().get(1);</span>
+<span class="fc" id="L203">		int relationship = 2;</span>
+
+<span class="fc" id="L205">		testHook.edgesCreator(targetAssignment, sourceAssignment, relationship);</span>
+
+		// test the connected node of the start node of 2
+<span class="fc" id="L208">		assertEquals(targetAssignment.getStartNode().getInEdges().get(0).getConnectedNode().getId(), 1);</span>
+		// test the connected node of the start node of 1
+		// note: get(0).getConnectedNode() would be the end node of the sourceAssignment
+<span class="fc" id="L211">		assertEquals(sourceAssignment.getStartNode().getOutEdges().get(1).getConnectedNode().getId(), 2);</span>
+
+<span class="fc" id="L213">	}</span>
+
+	// Bad data: relation that is not 1, 2, 3 or 4
+	@Test(expected = NullPointerException.class)
+	public void test_edgeCreator_bad_data() {
+
+<span class="fc" id="L219">		int assignmentsList[][] = { { 1, 3 }, { 2, 2 } };</span>
+<span class="fc" id="L220">		testScheduler.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L221">		Assignment targetAssignment = testScheduler.getAssignmentsMap().get(2);</span>
+<span class="fc" id="L222">		Assignment sourceAssignment = testScheduler.getAssignmentsMap().get(1);</span>
+<span class="fc" id="L223">		int relationship = 5;</span>
+
+<span class="nc" id="L225">		testHook.edgesCreator(targetAssignment, sourceAssignment, relationship);</span>
+
+<span class="nc" id="L227">	}</span>
+
+	// test getInEdgesCountMap
+	// Structured basis: a random case
+	// Good data: expected data
+	// Boundary test for stack(include == and not == cases)
+	// Data flow for stack and inEdgesCountMap
+	@Test
+	public void test_getInEdgesCountMap() {
+<span class="fc" id="L236">		int assignmentsList[][] = { { 1, 3 }, { 2, 2 }, { 3, 4 }, { 4, 4 } };</span>
+<span class="fc" id="L237">		int relationsList[][] = { { 2, 1, 2 }, { 2, 4, 1 }, { 3, 2, 4 }, { 3, 1, 1 }, { 4, 1, 3 } };</span>
+<span class="fc" id="L238">		testScheduler.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L239">		testScheduler.addRelations(relationsList);</span>
+<span class="fc" id="L240">		testHook.getInEdgesCountMap(testScheduler.getAssignmentsMap());</span>
+		// test the in edges number of the start node of #1
+<span class="fc" id="L242">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(1).getStartNode()),</span>
+<span class="fc" id="L243">				Integer.valueOf(0));</span>
+		// test the in edges number of the start node of #2
+<span class="fc" id="L245">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(2).getStartNode()),</span>
+<span class="fc" id="L246">				Integer.valueOf(2));</span>
+		// test the in edges number of the start node of #3
+<span class="fc" id="L248">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(3).getStartNode()),</span>
+<span class="fc" id="L249">				Integer.valueOf(1));</span>
+		// test the in edges number of the start node of #4
+<span class="fc" id="L251">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(4).getStartNode()),</span>
+<span class="fc" id="L252">				Integer.valueOf(0));</span>
+
+		// test the in edges number of the end node of #1
+<span class="fc" id="L255">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(1).getEndNode()),</span>
+<span class="fc" id="L256">				Integer.valueOf(1));</span>
+		// test the in edges number of the end node of #2
+<span class="fc" id="L258">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(2).getEndNode()),</span>
+<span class="fc" id="L259">				Integer.valueOf(1));</span>
+		// test the in edges number of the end node of #3
+<span class="fc" id="L261">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(3).getEndNode()),</span>
+<span class="fc" id="L262">				Integer.valueOf(2));</span>
+		// test the in edges number of the end node of #4
+<span class="fc" id="L264">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(4).getEndNode()),</span>
+<span class="fc" id="L265">				Integer.valueOf(2));</span>
+
+		// the nodes inside stack
+<span class="fc" id="L268">		assertEquals(testHook.getStack().pop(), testScheduler.getAssignmentsMap().get(4).getStartNode());</span>
+<span class="fc" id="L269">		assertEquals(testHook.getStack().pop(), testScheduler.getAssignmentsMap().get(1).getStartNode());</span>
+<span class="fc" id="L270">	}</span>
+
+	// Bad data: no relation
+	// Boundary: no relation
+	// Boundary test for stack(include == and not == cases)
+	// Data flow for stack and inEdgesCountMap
+	@Test
+	public void test_getInEdgesCountMap_no_relation() {
+<span class="fc" id="L278">		int assignmentsList[][] = { { 1, 3 }, { 2, 2 }, { 3, 4 }, { 4, 4 } };</span>
+<span class="fc" id="L279">		int relationsList[][] = {};</span>
+<span class="fc" id="L280">		testScheduler.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L281">		testScheduler.addRelations(relationsList);</span>
+<span class="fc" id="L282">		testHook.getInEdgesCountMap(testScheduler.getAssignmentsMap());</span>
+
+		// test the in edges number of the start node of #1
+<span class="fc" id="L285">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(1).getStartNode()),</span>
+<span class="fc" id="L286">				Integer.valueOf(0));</span>
+		// test the in edges number of the start node of #2
+<span class="fc" id="L288">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(2).getStartNode()),</span>
+<span class="fc" id="L289">				Integer.valueOf(0));</span>
+		// test the in edges number of the start node of #3
+<span class="fc" id="L291">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(3).getStartNode()),</span>
+<span class="fc" id="L292">				Integer.valueOf(0));</span>
+		// test the in edges number of the start node of #4
+<span class="fc" id="L294">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(4).getStartNode()),</span>
+<span class="fc" id="L295">				Integer.valueOf(0));</span>
+
+		// test the in edges number of the end node of #1
+<span class="fc" id="L298">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(1).getEndNode()),</span>
+<span class="fc" id="L299">				Integer.valueOf(1));</span>
+		// test the in edges number of the end node of #2
+<span class="fc" id="L301">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(2).getEndNode()),</span>
+<span class="fc" id="L302">				Integer.valueOf(1));</span>
+		// test the in edges number of the end node of #3
+<span class="fc" id="L304">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(3).getEndNode()),</span>
+<span class="fc" id="L305">				Integer.valueOf(1));</span>
+		// test the in edges number of the end node of #4
+<span class="fc" id="L307">		assertEquals(testHook.getInEdgesCountMap().get(testScheduler.getAssignmentsMap().get(4).getEndNode()),</span>
+<span class="fc" id="L308">				Integer.valueOf(1));</span>
+
+		// the nodes inside stack
+<span class="fc" id="L311">		assertEquals(testHook.getStack().pop(), testScheduler.getAssignmentsMap().get(4).getStartNode());</span>
+<span class="fc" id="L312">		assertEquals(testHook.getStack().pop(), testScheduler.getAssignmentsMap().get(3).getStartNode());</span>
+<span class="fc" id="L313">		assertEquals(testHook.getStack().pop(), testScheduler.getAssignmentsMap().get(2).getStartNode());</span>
+<span class="fc" id="L314">		assertEquals(testHook.getStack().pop(), testScheduler.getAssignmentsMap().get(1).getStartNode());</span>
+<span class="fc" id="L315">	}</span>
+
+	// test sortOutNodes
+	// Structured basis: a random normal case
+	// Boundary: there is a node satisfies the inEdgesCountMap.get(outNode) == 0
+	// statement and can be check by popping the stack once
+	// Good data: expected data
+	@Test
+	public void test_sortOutNodes() {
+<span class="fc" id="L324">		int assignmentsList[][] = { { 1, 3 }, { 2, 2 }, { 3, 4 }, { 4, 4 } };</span>
+<span class="fc" id="L325">		int relationsList[][] = { { 2, 1, 2 }, { 2, 4, 1 }, { 3, 2, 4 }, { 3, 1, 1 }, { 4, 1, 3 } };</span>
+<span class="fc" id="L326">		testScheduler.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L327">		testScheduler.addRelations(relationsList);</span>
+		// sort the out nodes of the start node of #4
+<span class="fc" id="L329">		testHook.sortOutNodes(testScheduler.getAssignmentsMap(),</span>
+<span class="fc" id="L330">				testScheduler.getAssignmentsMap().get(1).getStartNode());</span>
+		// the last added object should be the end node of assignment #1
+<span class="fc" id="L332">		assertEquals(testHook.getStack().pop(), testScheduler.getAssignmentsMap().get(1).getEndNode());</span>
+<span class="fc" id="L333">	}</span>
+
+	// Boundary: no out connected node -&gt; no node pushed to the stack
+	// Bad data: no out connected node
+	@Test
+	public void test_sortOutNodes_no_out() {
+<span class="fc" id="L339">		int assignmentsList[][] = { { 1, 3 } };</span>
+<span class="fc" id="L340">		testScheduler.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L341">		testHook.sortOutNodes(testScheduler.getAssignmentsMap(), testScheduler.getAssignmentsMap().get(1).getEndNode());</span>
+		// pop the first object in the stack and it will be the start node of the
+		// assignment
+<span class="fc" id="L344">		assertEquals(testHook.getStack().pop(), testScheduler.getAssignmentsMap().get(1).getStartNode());</span>
+		// the stack will be empty now since there is no more out edge
+<span class="fc" id="L346">		assertTrue(testHook.getStack().isEmpty());</span>
+<span class="fc" id="L347">	}</span>
+
+	// test topologicalSort
+	// Structured basis: a random list of input
+	// Boundary: sorted Node size == 2 * assignment
+	// Data-flow: sortedNodeList and stack
+	// Good data: expected data
+	@Test
+	public void test_topologicalSort() {
+<span class="fc" id="L356">		int assignmentsList[][] = { { 1, 3 }, { 2, 2 }, { 3, 4 }, { 4, 4 } };</span>
+<span class="fc" id="L357">		int relationsList[][] = { { 2, 1, 2 }, { 2, 4, 1 }, { 3, 2, 4 }, { 3, 1, 1 }, { 4, 1, 3 } };</span>
+<span class="fc" id="L358">		DevelopmentScheduler schedule = new DevelopmentScheduler();</span>
+<span class="fc" id="L359">		schedule.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L360">		schedule.addRelations(relationsList);</span>
+<span class="fc" id="L361">		LinkedList&lt;AssignmentNode&gt; sortedNodeList = DevelopmentScheduler.topologicalSort(schedule.getAssignmentsMap());</span>
+<span class="fc" id="L362">		assertEquals(sortedNodeList.get(0).getId(), 4);</span>
+<span class="fc" id="L363">		assertTrue(sortedNodeList.get(0).isStart());</span>
+
+<span class="fc" id="L365">		assertEquals(sortedNodeList.get(5).getId(), 1);</span>
+<span class="fc" id="L366">		assertEquals(sortedNodeList.get(5).getTime(), 0);</span>
+
+<span class="fc" id="L368">		assertEquals(sortedNodeList.get(7).getId(), 3);</span>
+<span class="fc" id="L369">	}</span>
+
+	// Boundary: no assignment &amp; boundary is empty all the time
+	// Bad data: no assignment
+	@Test
+	public void test_topologicalSort_no_assignment() {
+<span class="fc" id="L375">		int assignmentsList[][] = {};</span>
+<span class="fc" id="L376">		int relationsList[][] = {};</span>
+<span class="fc" id="L377">		DevelopmentScheduler schedule = new DevelopmentScheduler();</span>
+<span class="fc" id="L378">		schedule.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L379">		schedule.addRelations(relationsList);</span>
+<span class="fc" id="L380">		LinkedList&lt;AssignmentNode&gt; sortedNodeList = DevelopmentScheduler.topologicalSort(schedule.getAssignmentsMap());</span>
+<span class="fc" id="L381">		assertTrue(sortedNodeList.isEmpty());</span>
+<span class="fc" id="L382">	}</span>
+
+	// Structured basis: sorted Node size != 2 * assignment(a cycle)
+	// Boundary: sorted Node size != 2 * assignment
+	// Bad data: a cycle
+	@Test(expected = IllegalStateException.class)
+	public void test_topologicalSort_cycle() {
+<span class="fc" id="L389">		int assignmentsList[][] = { { 1, 3 }, { 2, 4 } };</span>
+<span class="fc" id="L390">		int relationsList[][] = { { 1, 2, 3 }, { 2, 1, 1 } };</span>
+<span class="fc" id="L391">		DevelopmentScheduler schedule = new DevelopmentScheduler();</span>
+<span class="fc" id="L392">		schedule.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L393">		schedule.addRelations(relationsList);</span>
+<span class="nc" id="L394">		DevelopmentScheduler.topologicalSort(schedule.getAssignmentsMap());</span>
+
+<span class="nc" id="L396">	}</span>
+
+	// Stress test: 100000 assignments and relations. Will definitely have a cycle.
+	// Compound Boundary test: a great amount of assignments and relations
+	@Test(expected = IllegalStateException.class)
+	public void test_topologicalSort_stress() {
+<span class="fc" id="L402">		int assignmentsList[][] = new int[100000][2];</span>
+<span class="fc" id="L403">		int relationsList[][] = new int[100000][3];</span>
+<span class="fc" id="L404">		int durationList[] = new int[100000];</span>
+<span class="fc bfc" id="L405" title="All 2 branches covered.">		for (int i = 0; i &lt; 100000; i++) {</span>
+<span class="fc" id="L406">			Random ran = new Random();</span>
+<span class="fc" id="L407">			int duration = ran.nextInt(5000) + 1;</span>
+<span class="fc" id="L408">			assignmentsList[i] = new int[] { i + 1, duration };</span>
+<span class="fc" id="L409">			durationList[i] = duration;</span>
+		}
+<span class="fc bfc" id="L411" title="All 2 branches covered.">		for (int i = 0; i &lt; 100000; i++) {</span>
+<span class="fc" id="L412">			Random ran = new Random();</span>
+<span class="fc" id="L413">			int firstId = ran.nextInt(100000);</span>
+<span class="fc" id="L414">			int secondId = ran.nextInt(100000);</span>
+<span class="fc bfc" id="L415" title="All 2 branches covered.">			while (firstId == secondId) {</span>
+<span class="fc" id="L416">				secondId = ran.nextInt(100000);</span>
+			}
+<span class="fc" id="L418">			int relation = ran.nextInt(4) + 1;</span>
+<span class="fc" id="L419">			relationsList[i] = new int[] { assignmentsList[firstId][1], assignmentsList[secondId][1], relation };</span>
+
+		}
+<span class="fc" id="L422">		DevelopmentScheduler schedule = new DevelopmentScheduler();</span>
+<span class="fc" id="L423">		schedule.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L424">		schedule.addRelations(relationsList);</span>
+<span class="nc" id="L425">		DevelopmentScheduler.topologicalSort(schedule.getAssignmentsMap());</span>
+<span class="nc" id="L426">	}</span>
+
+	// test getMaxDuration
+	// Structured basis: a random case
+	// Good data: expected data
+	// Data-flow for maxDuration
+	@Test
+	public void test_getMaxDuration() {
+<span class="fc" id="L434">		int assignmentsList[][] = { { 1, 3 }, { 2, 2 }, { 3, 4 }, { 4, 4 } };</span>
+<span class="fc" id="L435">		int relationsList[][] = { { 2, 1, 2 }, { 2, 4, 1 }, { 3, 2, 4 }, { 3, 1, 1 }, { 4, 1, 3 } };</span>
+<span class="fc" id="L436">		testScheduler.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L437">		testScheduler.addRelations(relationsList);</span>
+<span class="fc" id="L438">		LinkedList&lt;AssignmentNode&gt; sortedNodeList = DevelopmentScheduler</span>
+<span class="fc" id="L439">				.topologicalSort(testScheduler.getAssignmentsMap());</span>
+		// check the max duration for each node in the order of the sorted node
+<span class="fc" id="L441">		assertEquals(testHook.getMaxDuration(sortedNodeList.get(0)), 0);</span>
+<span class="fc" id="L442">		assertEquals(testHook.getMaxDuration(sortedNodeList.get(1)), 0);</span>
+<span class="fc" id="L443">		assertEquals(testHook.getMaxDuration(sortedNodeList.get(2)), 4);</span>
+<span class="fc" id="L444">		assertEquals(testHook.getMaxDuration(sortedNodeList.get(3)), 0);</span>
+<span class="fc" id="L445">		assertEquals(testHook.getMaxDuration(sortedNodeList.get(4)), 2);</span>
+<span class="fc" id="L446">		assertEquals(testHook.getMaxDuration(sortedNodeList.get(5)), 3);</span>
+<span class="fc" id="L447">		assertEquals(testHook.getMaxDuration(sortedNodeList.get(6)), 0);</span>
+<span class="fc" id="L448">		assertEquals(testHook.getMaxDuration(sortedNodeList.get(7)), 4);</span>
+
+<span class="fc" id="L450">	}</span>
+
+	// Boundary: no data
+	// Bad data: no data
+	@Test(expected = NullPointerException.class)
+	public void test_getMaxDuration_no_node() {
+<span class="nc" id="L456">		testHook.getMaxDuration(null);</span>
+<span class="nc" id="L457">	}</span>
+
+	// Boundary: no relation
+	@Test
+	public void test_getMaxDuration_no_relation() {
+<span class="fc" id="L462">		int assignmentsList[][] = { { 1, 3 }, { 2, 2 } };</span>
+<span class="fc" id="L463">		int relationsList[][] = {};</span>
+<span class="fc" id="L464">		testScheduler.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L465">		testScheduler.addRelations(relationsList);</span>
+<span class="fc" id="L466">		assertEquals(testHook.getMaxDuration(testScheduler.getAssignmentsMap().get(1).getStartNode()), 0);</span>
+<span class="fc" id="L467">		assertEquals(testHook.getMaxDuration(testScheduler.getAssignmentsMap().get(1).getEndNode()), 3);</span>
+<span class="fc" id="L468">		assertEquals(testHook.getMaxDuration(testScheduler.getAssignmentsMap().get(2).getStartNode()), 0);</span>
+<span class="fc" id="L469">		assertEquals(testHook.getMaxDuration(testScheduler.getAssignmentsMap().get(2).getEndNode()), 2);</span>
+<span class="fc" id="L470">	}</span>
+
+	// test deliveryTimeCalculator
+	// Structured basis: a random case
+	// Good data: expected data
+	@Test
+	public void test_deliveryTimeCalculator() {
+<span class="fc" id="L477">		int assignmentsList[][] = { { 1, 3 }, { 2, 2 }, { 3, 4 }, { 4, 4 } };</span>
+<span class="fc" id="L478">		int relationsList[][] = { { 2, 1, 2 }, { 2, 4, 1 }, { 3, 2, 4 }, { 3, 1, 1 }, { 4, 1, 3 } };</span>
+<span class="fc" id="L479">		assertEquals(DevelopmentScheduler.deliveryTimeCalculator(assignmentsList, relationsList), Integer.valueOf(7));</span>
+<span class="fc" id="L480">	}</span>
+
+	// Boundary: no assignment and relation
+	// Bad data: no assignment and relation
+	// Compound boundary
+	@Test
+	public void test_deliveryTimeCalculator_no_assignment_relation() {
+<span class="fc" id="L487">		int assignmentsList[][] = {};</span>
+<span class="fc" id="L488">		int relationsList[][] = {};</span>
+<span class="fc" id="L489">		assertEquals(DevelopmentScheduler.deliveryTimeCalculator(assignmentsList, relationsList), Integer.valueOf(0));</span>
+<span class="fc" id="L490">	}</span>
+
+	// Boundary: no relation
+	// Bad data: no relation
+	// Compound boundary
+	// expect to be the maximum duration out the the 2 assignments
+	@Test
+	public void test_deliveryTimeCalculator_no_relation() {
+<span class="fc" id="L498">		int assignmentsList[][] = { { 1, 3 }, { 2, 2 } };</span>
+<span class="fc" id="L499">		int relationsList[][] = {};</span>
+<span class="fc" id="L500">		assertEquals(DevelopmentScheduler.deliveryTimeCalculator(assignmentsList, relationsList), Integer.valueOf(3));</span>
+<span class="fc" id="L501">	}</span>
+
+	// Stress test: 100000 assignments and relations
+	// cycle expected
+	@Test(expected = IllegalStateException.class)
+	public void test_deliveryTimeCalculator_stess() {
+<span class="fc" id="L507">		int assignmentsList[][] = new int[100000][2];</span>
+<span class="fc" id="L508">		int relationsList[][] = new int[100000][3];</span>
+<span class="fc" id="L509">		int durationList[] = new int[100000];</span>
+<span class="fc bfc" id="L510" title="All 2 branches covered.">		for (int i = 0; i &lt; 100000; i++) {</span>
+<span class="fc" id="L511">			Random ran = new Random();</span>
+<span class="fc" id="L512">			int duration = ran.nextInt(5000) + 1;</span>
+<span class="fc" id="L513">			assignmentsList[i] = new int[] { i + 1, duration };</span>
+<span class="fc" id="L514">			durationList[i] = duration;</span>
+		}
+<span class="fc bfc" id="L516" title="All 2 branches covered.">		for (int i = 0; i &lt; 100000; i++) {</span>
+<span class="fc" id="L517">			Random ran = new Random();</span>
+<span class="fc" id="L518">			int firstId = ran.nextInt(100000);</span>
+<span class="fc" id="L519">			int secondId = ran.nextInt(100000);</span>
+<span class="fc bfc" id="L520" title="All 2 branches covered.">			while (firstId == secondId) {</span>
+<span class="fc" id="L521">				secondId = ran.nextInt(100000);</span>
+			}
+<span class="fc" id="L523">			int relation = ran.nextInt(4) + 1;</span>
+<span class="fc" id="L524">			relationsList[i] = new int[] { assignmentsList[firstId][1], assignmentsList[secondId][1], relation };</span>
+
+		}
+<span class="fc" id="L527">		DevelopmentScheduler schedule = new DevelopmentScheduler();</span>
+<span class="fc" id="L528">		schedule.assignmentNodeInitializer(assignmentsList);</span>
+<span class="fc" id="L529">		schedule.addRelations(relationsList);</span>
+<span class="nc" id="L530">		DevelopmentScheduler.deliveryTimeCalculator(assignmentsList, relationsList);</span>
+<span class="nc" id="L531">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

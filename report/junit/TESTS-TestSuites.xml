@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+  <testsuite errors="0" failures="0" hostname="Adams-MacBook-Pro.local" id="0" name="AssignmentNodeTest" package="" skipped="0" tests="1" time="5.072" timestamp="2017-11-02T04:06:02">
+      <properties>
+          <property name="java.vendor" value="Oracle Corporation" />
+
+          <property name="sun.java.launcher" value="SUN_STANDARD" />
+
+          <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+
+          <property name="os.name" value="Mac OS X" />
+
+          <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/classes" />
+
+          <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+
+          <property name="ant.home" value="/Library/apache-ant" />
+
+          <property name="java.runtime.version" value="1.8.0_144-b01" />
+
+          <property name="user.name" value="adamlaw" />
+
+          <property name="build.dir" value="build" />
+
+          <property name="user.language" value="en" />
+
+          <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib" />
+
+          <property name="doc.dir" value="doc" />
+
+          <property name="ant.project.name" value="DevelopmentScheduler" />
+
+          <property name="java.version" value="1.8.0_144" />
+
+          <property name="user.timezone" value="" />
+
+          <property name="sun.arch.data.model" value="64" />
+
+          <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
+
+          <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/endorsed" />
+
+          <property name="sun.cpu.isalist" value="" />
+
+          <property name="sun.jnu.encoding" value="UTF-8" />
+
+          <property name="file.encoding.pkg" value="sun.io" />
+
+          <property name="file.separator" value="/" />
+
+          <property name="java.specification.name" value="Java Platform API Specification" />
+
+          <property name="java.class.version" value="52.0" />
+
+          <property name="user.country" value="US" />
+
+          <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre" />
+
+          <property name="java.vm.info" value="mixed mode" />
+
+          <property name="main-class" value="Scheduler" />
+
+          <property name="ant.file" value="/Users/adamlaw/Desktop/DevelopmentScheduler/build.xml" />
+
+          <property name="os.version" value="10.12.6" />
+
+          <property name="path.separator" value=":" />
+
+          <property name="java.vm.version" value="25.144-b01" />
+
+          <property name="report.dir" value="report" />
+
+          <property name="ant.library.dir" value="/Library/apache-ant/lib" />
+
+          <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob" />
+
+          <property name="sun.io.unicode.encoding" value="UnicodeBig" />
+
+          <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit" />
+
+          <property name="_jacoco.agentFile" value="/var/folders/76/d5bxwvdx5xd44rdmmkmcl33w0000gn/T/jacocoagent1989083469815727866.jar" />
+
+          <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
+
+          <property name="ant.file.DevelopmentScheduler" value="/Users/adamlaw/Desktop/DevelopmentScheduler/build.xml" />
+
+          <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
+
+          <property name="user.home" value="/Users/adamlaw" />
+
+          <property name="java.specification.vendor" value="Oracle Corporation" />
+
+          <property name="junit.dir" value="report/junit" />
+
+          <property name="java.library.path" value="/Users/adamlaw/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:." />
+
+          <property name="java.vendor.url" value="http://java.oracle.com/" />
+
+          <property name="java.vm.vendor" value="Oracle Corporation" />
+
+          <property name="gopherProxySet" value="false" />
+
+          <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
+
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner AssignmentNodeTest skipNonTests=false filtertrace=false haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.OutErrSummaryJUnitResultFormatter showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/adamlaw/Desktop/DevelopmentScheduler/report/junit/TEST-AssignmentNodeTest.xml crashfile=/Users/adamlaw/Desktop/DevelopmentScheduler/junitvmwatcher7194785929912369370.properties propsfile=/Users/adamlaw/Desktop/DevelopmentScheduler/junit1660571136026283625.properties" />
+
+          <property name="java.class.path" value="/Library/apache-ant/lib/hamcrest-core-1.3.jar:/Users/adamlaw/Desktop/DevelopmentScheduler/build:/Library/apache-ant/lib/junit-4.12.jar:/Library/apache-ant/lib/ant-launcher.jar:/Library/apache-ant/lib/ant.jar:/Library/apache-ant/lib/ant-junit.jar:/Library/apache-ant/lib/ant-junit4.jar:/var/folders/76/d5bxwvdx5xd44rdmmkmcl33w0000gn/T/jacocoagent1989083469815727866.jar" />
+
+          <property name="ant.version" value="Apache Ant(TM) version 1.10.1 compiled on February 2 2017" />
+
+          <property name="jacoco.file" value="report/jacoco/jacoco.exec" />
+
+          <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+
+          <property name="ant.file.type" value="file" />
+
+          <property name="java.vm.specification.version" value="1.8" />
+
+          <property name="sun.cpu.endian" value="little" />
+
+          <property name="sun.os.patch.level" value="unknown" />
+
+          <property name="java.io.tmpdir" value="/var/folders/76/d5bxwvdx5xd44rdmmkmcl33w0000gn/T/" />
+
+          <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+
+          <property name="os.arch" value="x86_64" />
+
+          <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment" />
+
+          <property name="java.ext.dirs" value="/Users/adamlaw/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java" />
+
+          <property name="ant.file.type.DevelopmentScheduler" value="file" />
+
+          <property name="user.dir" value="/Users/adamlaw/Desktop/DevelopmentScheduler" />
+
+          <property name="jacoco.dir" value="report/jacoco" />
+
+          <property name="line.separator" value="&#xa;" />
+
+          <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM" />
+
+          <property name="basedir" value="/Users/adamlaw/Desktop/DevelopmentScheduler" />
+
+          <property name="ant.java.version" value="1.8" />
+
+          <property name="ant.core.lib" value="/Library/apache-ant/lib/ant.jar" />
+
+          <property name="file.encoding" value="UTF-8" />
+
+          <property name="java.specification.version" value="1.8" />
+
+          <property name="src.dir" value="src" />
+
+          <property name="ant.project.invoked-targets" value="report" />
+
+      </properties>
+
+      <testcase classname="AssignmentNodeTest" name="testAddInEdge" time="0.003" />
+
+      <system-out><![CDATA[]]></system-out>
+
+      <system-err><![CDATA[]]></system-err>
+
+  </testsuite>
+  <testsuite errors="0" failures="0" hostname="Adams-MacBook-Pro.local" id="1" name="DevelopmentSchedulerTest" package="" skipped="0" tests="30" time="6.106" timestamp="2017-11-02T04:06:13">
+      <properties>
+          <property name="java.vendor" value="Oracle Corporation" />
+
+          <property name="sun.java.launcher" value="SUN_STANDARD" />
+
+          <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+
+          <property name="os.name" value="Mac OS X" />
+
+          <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/classes" />
+
+          <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+
+          <property name="ant.home" value="/Library/apache-ant" />
+
+          <property name="java.runtime.version" value="1.8.0_144-b01" />
+
+          <property name="user.name" value="adamlaw" />
+
+          <property name="build.dir" value="build" />
+
+          <property name="user.language" value="en" />
+
+          <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib" />
+
+          <property name="doc.dir" value="doc" />
+
+          <property name="ant.project.name" value="DevelopmentScheduler" />
+
+          <property name="java.version" value="1.8.0_144" />
+
+          <property name="user.timezone" value="" />
+
+          <property name="sun.arch.data.model" value="64" />
+
+          <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
+
+          <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/endorsed" />
+
+          <property name="sun.cpu.isalist" value="" />
+
+          <property name="sun.jnu.encoding" value="UTF-8" />
+
+          <property name="file.encoding.pkg" value="sun.io" />
+
+          <property name="file.separator" value="/" />
+
+          <property name="java.specification.name" value="Java Platform API Specification" />
+
+          <property name="java.class.version" value="52.0" />
+
+          <property name="user.country" value="US" />
+
+          <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre" />
+
+          <property name="java.vm.info" value="mixed mode" />
+
+          <property name="main-class" value="Scheduler" />
+
+          <property name="ant.file" value="/Users/adamlaw/Desktop/DevelopmentScheduler/build.xml" />
+
+          <property name="os.version" value="10.12.6" />
+
+          <property name="path.separator" value=":" />
+
+          <property name="java.vm.version" value="25.144-b01" />
+
+          <property name="report.dir" value="report" />
+
+          <property name="ant.library.dir" value="/Library/apache-ant/lib" />
+
+          <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob" />
+
+          <property name="sun.io.unicode.encoding" value="UnicodeBig" />
+
+          <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit" />
+
+          <property name="_jacoco.agentFile" value="/var/folders/76/d5bxwvdx5xd44rdmmkmcl33w0000gn/T/jacocoagent1989083469815727866.jar" />
+
+          <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
+
+          <property name="ant.file.DevelopmentScheduler" value="/Users/adamlaw/Desktop/DevelopmentScheduler/build.xml" />
+
+          <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
+
+          <property name="user.home" value="/Users/adamlaw" />
+
+          <property name="java.specification.vendor" value="Oracle Corporation" />
+
+          <property name="junit.dir" value="report/junit" />
+
+          <property name="java.library.path" value="/Users/adamlaw/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:." />
+
+          <property name="java.vendor.url" value="http://java.oracle.com/" />
+
+          <property name="java.vm.vendor" value="Oracle Corporation" />
+
+          <property name="gopherProxySet" value="false" />
+
+          <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
+
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner DevelopmentSchedulerTest skipNonTests=false filtertrace=false haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.OutErrSummaryJUnitResultFormatter showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/adamlaw/Desktop/DevelopmentScheduler/report/junit/TEST-DevelopmentSchedulerTest.xml crashfile=/Users/adamlaw/Desktop/DevelopmentScheduler/junitvmwatcher159766957515966279.properties propsfile=/Users/adamlaw/Desktop/DevelopmentScheduler/junit5140271781035718191.properties" />
+
+          <property name="java.class.path" value="/Library/apache-ant/lib/hamcrest-core-1.3.jar:/Users/adamlaw/Desktop/DevelopmentScheduler/build:/Library/apache-ant/lib/junit-4.12.jar:/Library/apache-ant/lib/ant-launcher.jar:/Library/apache-ant/lib/ant.jar:/Library/apache-ant/lib/ant-junit.jar:/Library/apache-ant/lib/ant-junit4.jar:/var/folders/76/d5bxwvdx5xd44rdmmkmcl33w0000gn/T/jacocoagent1989083469815727866.jar" />
+
+          <property name="ant.version" value="Apache Ant(TM) version 1.10.1 compiled on February 2 2017" />
+
+          <property name="jacoco.file" value="report/jacoco/jacoco.exec" />
+
+          <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+
+          <property name="ant.file.type" value="file" />
+
+          <property name="java.vm.specification.version" value="1.8" />
+
+          <property name="sun.cpu.endian" value="little" />
+
+          <property name="sun.os.patch.level" value="unknown" />
+
+          <property name="java.io.tmpdir" value="/var/folders/76/d5bxwvdx5xd44rdmmkmcl33w0000gn/T/" />
+
+          <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+
+          <property name="os.arch" value="x86_64" />
+
+          <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment" />
+
+          <property name="java.ext.dirs" value="/Users/adamlaw/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java" />
+
+          <property name="ant.file.type.DevelopmentScheduler" value="file" />
+
+          <property name="user.dir" value="/Users/adamlaw/Desktop/DevelopmentScheduler" />
+
+          <property name="jacoco.dir" value="report/jacoco" />
+
+          <property name="line.separator" value="&#xa;" />
+
+          <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM" />
+
+          <property name="basedir" value="/Users/adamlaw/Desktop/DevelopmentScheduler" />
+
+          <property name="ant.java.version" value="1.8" />
+
+          <property name="ant.core.lib" value="/Library/apache-ant/lib/ant.jar" />
+
+          <property name="file.encoding" value="UTF-8" />
+
+          <property name="java.specification.version" value="1.8" />
+
+          <property name="src.dir" value="src" />
+
+          <property name="ant.project.invoked-targets" value="report" />
+
+      </properties>
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_getInEdgesCountMap" time="0.005" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_deliveryTimeCalculator_stess" time="0.558" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_addAssignment_both_zero" time="0.001" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_getMaxDuration_no_relation" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_topologicalSort_no_assignment" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_sortOutNodes" time="0.001" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_addRelations_one_relation" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_edgeCreator_bad_data" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_addAssignment_both_neg_big" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_addRelations_no_assignment_relation" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_deliveryTimeCalculator" time="0.001" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_assignmentNodeInitializer_stress" time="0.11" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_topologicalSort_stress" time="0.356" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_assignmentNodeInitializer_only_one" time="0.001" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_addRelations_good_data" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_topologicalSort_cycle" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_deliveryTimeCalculator_no_relation" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_topologicalSort" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_getMaxDuration_no_node" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_addAssignment_no_assignment" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_sortOutNodes_no_out" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_addAssignment_both_pos_big" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_getInEdgesCountMap_no_relation" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_assignmentNodeInitializer_good_data" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_getMaxDuration" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_deliveryTimeCalculator_no_assignment_relation" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_addAssignment_both_positive" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_assignmentNodeInitializer_none" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_addAssignment_both_negative" time="0.0" />
+
+      <testcase classname="DevelopmentSchedulerTest" name="test_edgeCreator" time="0.0" />
+
+      <system-out><![CDATA[]]></system-out>
+
+      <system-err><![CDATA[]]></system-err>
+
+  </testsuite>
+</testsuites>
